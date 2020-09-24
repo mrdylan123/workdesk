@@ -1,0 +1,160 @@
+*,*::before,*::after {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+    /* overflow-y: hidden; */
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+@font-face {
+    font-family: PoppinsLight;
+    src: url(../fonts/Poppins-Light.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url(../fonts/Poppins-Regular.ttf) format("truetype");
+}
+
+body {
+    font-family: PoppinsLight;
+}
+
+/*
+*
+*
+*/
+
+/* Utility */
+.fullheight {
+    height: 100%;
+}
+
+.height_100vh {
+    min-height: 100vh;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.center {
+    float: none;
+    margin: auto;
+}
+
+.nopadding {
+    padding: 0;
+}
+
+/* HEADER */
+.header {
+    height: 6vh;
+    background-color: #8B0000;
+    color: white;
+}
+
+.top-nav {
+    font-size: 1rem;
+}
+
+
+.title {
+    margin-bottom: 0;
+}
+
+/* Content */
+.agenda {
+    min-height: 84vh;
+}
+
+.legend {
+    background-color: white;
+    height: 100%;
+    text-align: right;
+    border-right: #dadec0 1px solid;
+    vertical-align: middle;
+}
+
+.legend .timediv {
+    margin-top: 5vh;
+    height: 3.5vh;
+    line-height: 3.5vh; /* Vertical align text */
+    font-size: 0.7rem;
+    padding-right: 10px;
+}
+
+.legend > div:first-child {
+    margin-top: 10vh;
+}
+
+.legend .timediv:not(:last-child) {
+    padding-bottom: 10vh;
+}
+
+.legend:last-child {
+    margin-bottom: 10vh;
+}
+
+/* Horizontal lines for agenda */
+.legend .timediv:not(:last-child):before {
+    content:"";
+    position:absolute;
+    margin-top: 1.75vh; /** Vertical center (half of .timediv height) **/ 
+    left:100%;
+    width:90vw;
+    height:1px;
+    background:#dadec0;   
+}
+
+.legend .timediv p {
+    display: inline-block;
+}
+
+.agendacontent {
+    min-height: 100%;
+}
+
+.agendacontent .daydiv {
+    min-width: 20vw;
+    min-height: 100%;
+    border-right: #dadec0 1px solid;
+}
+
+/* Bottom nav */
+.nav {
+    height: 10vh;
+    /* background-color: #1d1e22; */
+    background-color: #272930;
+    position: fixed;
+    bottom: 0vh;
+    min-width: 100%;
+}
+
+.navcol {
+    text-align: center;
+}
+
+
+/* Scaling of the bottom navbar buttons */
+.bottom-nav {
+    font-size: 1.7rem;
+}
+
+.navbutton:hover .fa-circle {
+    color: white;
+    transition: 0.8s ease-out;
+}
+
+.navbutton:hover .fa-calendar, .navbutton:hover .fa-user, .navbutton:hover .fa-sign-out-alt, .navbutton:hover .fa-calendar-day{
+    color: #212529;
+    transition: 0.8s ease-out;
+}
+
+.navbutton:hover .topcircle {
+    color: #5A6268;
+}
