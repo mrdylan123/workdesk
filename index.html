@@ -4,19 +4,29 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>WorkDesk PWA</title>
-        <meta name="description" content="">
+        <meta name="description" content="WorkDesk App built for installation companies">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#8B0000" />
+
+        <!-- Manifest (Progressive Web App) -->
+        <link rel="manifest" href="/manifest.json">
+
+        <!-- Add iOS meta tags and icons (Doesn't fully support PWA yet) -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="WorkDesk PWA">
+        <link rel="apple-touch-icon" href="/img/android-chrome-192x192.png">
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon.ico">
 
-        <!-- Stylesheets -->
-
-        <!-- Bootstrap stylesheet -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <!-- Font Awesome-->
         <script src="https://kit.fontawesome.com/165d816205.js" crossorigin="anonymous"></script>
 
+        <!-- Bootstrap stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <!-- Personal stylesheet -->
         <link rel="stylesheet" href="css/style.css">
     </head>
     
@@ -121,5 +131,18 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
+        <!-- Register service worker -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                        });
+                });
+            }
+        </script>
+    
     </body>
 </html>
