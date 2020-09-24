@@ -125,11 +125,6 @@ body {
     border-right: #dadec0 1px solid;
 }
 
-.event {
-    color: white;
-    width: 85%;
-}
-
 /* Bottom nav */
 .nav {
     height: 10vh;

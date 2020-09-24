@@ -1,6 +1,6 @@
 var werkbonnen;
 
-var eventColorPalette = ["#6ba292", "#ffdc7c", "#ff9b71", "#dd614a"];
+var eventColorPalette = ["#6ba292", "#FFCC42", "#ff9b71", "#dd614a"];
 var counter = 0;
 
 $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: function(result){    
@@ -27,7 +27,9 @@ $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: 
                         "position": "absolute", 
                         "margin-top": "1.75vh",  // Set margin-top to 1.75vh, just like the horizontal roster lines, as the div's height is 3.5vh, but the text is vertically centered.
                         "height": height + "vh",
-                        "background-color": color  
+                        "background-color": color,
+                        "width": "85%",
+                        "color": "white"  
                     });
 
         $(".day1").append($newEvent);
