@@ -1,11 +1,28 @@
 'use strict';
 
 // Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v2';
+const CACHE_NAME = 'static-cache-v4'; // Static cache (app shell)
+const DATA_CACHE_NAME = 'data-cache-v1'; // Dynamic cache (data)
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    './offline.html',
+    '/',
+    './index.html',
+    './css/bootstrap.min.css',
+    './css/style.css',
+    './scripts/app1.js',
+    './scripts/bootstrap.min.js',
+    './scripts/jquery-3.5.1.min.js',
+    './scripts/fontawesome.js',
+    './img/android-chrome-192x192.png',
+    './img/android-chrome-512x512.png',
+    './img/apple-touch-icon.png',
+    './img/favicon-16x16.png',
+    './img/favicon-32x32.png',
+    './img/favicon.ico',
+    './fonts/Poppins-Light.tff',
+    './fonts/Poppins-Light.tff',
+
 ];
 
 self.addEventListener('install', (evt) => {
@@ -26,7 +43,7 @@ self.addEventListener('activate', (evt) => {
     evt.waitUntil(
         caches.keys().then((keyList) => {
         return Promise.all(keyList.map((key) => {
-            if (key !== CACHE_NAME) {
+            if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
             console.log('[ServiceWorker] Removing old cache', key);
             return caches.delete(key);
             }
@@ -37,19 +54,30 @@ self.addEventListener('activate', (evt) => {
 });
 
 self.addEventListener('fetch', (evt) => {
-    console.log('[ServiceWorker] Fetch', evt.request.url);
-    // Fetch event handler.
-    if (evt.request.mode !== 'navigate') {
-        // Not a page navigation, bail.
+    if(evt.request.url.includes('/werkbonnen')) {
+        console.log('[ServiceWorker] Fetch (data)', evt.request.url);
+        evt.respondWith(
+            caches.open(DATA_CACHE_NAME).then((cache) => {
+              return fetch(evt.request)
+                  .then((response) => {
+                    // If the response was good, clone it and store it in the cache.
+                    if (response.status === 200) {
+                      cache.put(evt.request.url, response.clone());
+                    }
+                    return response;
+                  }).catch((err) => {
+                    // Network request failed, try to get it from the cache.
+                    return cache.match(evt.request);
+                  });
+            }));
         return;
     }
     evt.respondWith(
-        fetch(evt.request)
-            .catch(() => {
-                return caches.open(CACHE_NAME)
-                    .then((cache) => {
-                    return cache.match('offline.html');
-                    });
-            })
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.match(evt.request)
+                .then((response) => {
+                    return response || fetch(evt.request);
+                });
+        })
     );
 });
