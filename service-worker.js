@@ -1,12 +1,12 @@
 'use strict';
 
 // Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v4'; // Static cache (app shell)
-const DATA_CACHE_NAME = 'data-cache-v1'; // Dynamic cache (data)
+const CACHE_NAME = 'static-cache-v5'; // Static cache (app shell)
+const DATA_CACHE_NAME = 'data-cache-v2'; // Dynamic cache (data)
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    '/',
+    './',
     './index.html',
     './css/bootstrap.min.css',
     './css/style.css',
@@ -20,9 +20,8 @@ const FILES_TO_CACHE = [
     './img/favicon-16x16.png',
     './img/favicon-32x32.png',
     './img/favicon.ico',
-    './fonts/Poppins-Light.tff',
-    './fonts/Poppins-Light.tff',
-
+    './fonts/Poppins-Light.ttf',
+    './fonts/Poppins-Regular.ttf'
 ];
 
 self.addEventListener('install', (evt) => {

@@ -13,11 +13,13 @@ a, a:hover {
 @font-face {
     font-family: PoppinsLight;
     src: url(../fonts/Poppins-Light.ttf) format("truetype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Poppins;
     src: url(../fonts/Poppins-Regular.ttf) format("truetype");
+    font-display: swap;
 }
 
 body {
@@ -86,11 +88,11 @@ body {
     margin-top: 5vh;
     height: 3.5vh;
     line-height: 3.5vh; /* Vertical align text */
-    font-size: 0.7rem;
+    font-size: 12px;
     padding-right: 10px;
 }
 
-.legend > div:first-child {
+.legend .timediv:nth-child(2) {
     margin-top: 10vh;
 }
 
@@ -100,14 +102,10 @@ body {
 
 .legend .timediv:last-child {
     min-height: 10vh;
-
-    /*margin-bottom: 15vh; /* 5 vh for correct hour size + 10 vh for nav */
 }
 
 .legend .timediv:last-child p {
-    min-height: 10vh;
-
-    /*margin-bottom: 15vh; /* 5 vh for correct hour size + 10 vh for nav */
+    font-size: 12px;
 }
 
 /* Horizontal lines for agenda */
