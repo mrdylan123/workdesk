@@ -24,6 +24,8 @@ body {
     font-family: PoppinsLight;
 }
 
+
+
 /*
 *
 *
@@ -92,16 +94,24 @@ body {
     margin-top: 10vh;
 }
 
-.legend .timediv:not(:last-child) {
+.legend .timediv/*:not(:last-child)*/ {
     padding-bottom: 10vh;
 }
 
-.legend:last-child {
-    margin-bottom: 10vh;
+.legend .timediv:last-child {
+    min-height: 10vh;
+
+    /*margin-bottom: 15vh; /* 5 vh for correct hour size + 10 vh for nav */
+}
+
+.legend .timediv:last-child p {
+    min-height: 10vh;
+
+    /*margin-bottom: 15vh; /* 5 vh for correct hour size + 10 vh for nav */
 }
 
 /* Horizontal lines for agenda */
-.legend .timediv:not(:last-child):before {
+.legend .timediv/*:not(:last-child)*/:before {
     content:"";
     position:absolute;
     margin-top: 1.75vh; /** Vertical center (half of .timediv height) **/ 
@@ -111,10 +121,6 @@ body {
     background:#dadec0;   
 }
 
-.legend .timediv p {
-    display: inline-block;
-}
-
 .agendacontent {
     min-height: 100%;
 }
@@ -122,6 +128,9 @@ body {
 .agendacontent .daydiv {
     min-width: 20vw;
     min-height: 100%;
+}
+
+.agendacontent .daydiv:not(:last-child) {
     border-right: #dadec0 1px solid;
 }
 
@@ -157,4 +166,9 @@ body {
 
 .navbutton:hover .topcircle {
     color: #5A6268;
+}
+
+
+.timediv p {
+    margin-bottom: 0;
 }
