@@ -1,7 +1,7 @@
 'use strict';
 
 // Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v5'; // Static cache (app shell)
+const CACHE_NAME = 'static-cache-v6'; // Static cache (app shell)
 const DATA_CACHE_NAME = 'data-cache-v2'; // Dynamic cache (data)
 
 // CODELAB: Add list of files to cache here.
