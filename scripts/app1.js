@@ -1,10 +1,11 @@
 var werkbonnen = [];
 
-var eventColorPalette = ["#6ba292", "#FFCC42", "#ff9b71", "#dd614a"];
+var eventColorPalette = ["#6ba292", "#FFCC42", "#ff9b71"];
+
+var marginTop = parseFloat($(".hiddenDiv").css("margin-top")); // Get the margin top value of 1.75vh (in px) for this certain device, to use later on
 
 $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: function(result){    
     result.forEach(element => {
-        //console.log(element);
         werkbonnen.push(element);
 
         // Create div and add content to it
@@ -14,8 +15,6 @@ $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: 
         $newEvent.append("<p>" + element.titel + "</p>");
         $newEvent.append("<p>" + element.startdatum + " - " + element.einddatum + "</p>");
 
-        // Calculate the position to put the div
-        var marginTop = parseFloat($(".hiddenDiv").css("margin-top")); // Get second child, as first child has more margin-top than the others
         var timePosition = $(".time" + parseFloat(element.startdatum)).position();
         var divPosition = marginTop + timePosition.top;
 
@@ -42,7 +41,7 @@ $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: 
                         "font-family": "Arial, Helvetica",
                         "font-size": "14px",
                         "font-weight": "bold",
-                        "border-radius": "5px" // Rounding of the corners
+                        "border-radius": "5px",
         });
 
 
@@ -54,3 +53,67 @@ $.ajax({url: "https://5f6c8a6834d1ef0016d583ab.mockapi.io/werkbonnen", success: 
     console.log(werkbonnen);
 
   }});
+
+function ScrollToCurrentTime() {
+    // Get current time
+    var dt = new Date($.now());
+
+    // Get position of this time on the agenda
+    var hourPosition = $(".time" + parseFloat(dt.getHours())).position();
+
+    // Calculate the height of a minute in the agenda
+    var minuteHeight = ($('.time12').offset().top - $('.time11').offset().top) / 60;
+
+    // Get the minuteheight of the current time
+    var minutePosition = minuteHeight * dt.getMinutes();
+
+    // Add the minutes to it's position
+    var timePosition = hourPosition.top + minutePosition + marginTop;
+
+    var dayWidth = $(".daydiv").outerWidth(); // Get width of day div
+
+    // Create the elements
+    var $currentTimePointer = $("<div class='currentTimePointer'></div>");
+    $currentTimePointer.css({
+        "position": "absolute", 
+        "top": timePosition - 1.5, // Subtract 1.5, to keep it centered (1/2 of div size)
+        "border-top": "#FF3636 solid 3px",
+        "width": dayWidth,
+        "z-index": "1"
+    });
+
+    var $currentTimeCircle = $("<div class='currentTimeCircle'></div>");
+    $currentTimeCircle.css({
+        "position": "absolute", 
+        "top": timePosition - 5, // Subtract 5, to keep it centered (1/2 of div size)
+        "height": "10px",
+        "width": "10px",
+        "margin-left": "-5px",
+        "background-color": "#FF3636",
+        "border-radius": "50%",
+        "z-index": "1"
+    });
+    $(".agendarow").append($currentTimePointer);
+    $(".agendarow").append($currentTimeCircle);
+
+    // Scroll page to current timeframe
+    var pos = timePosition;
+    var elHeight = 3;
+    var windowHeight = $(window).height();
+    var offset;
+
+    if (elHeight < windowHeight) {
+        offset = pos - ((windowHeight / 2) - (elHeight / 2)) + $(".nav").height() + $(".header").height();
+    }
+    else {
+        offset = pos;
+    }
+
+    window.scroll({
+            top: offset,
+            behavior: 'smooth',
+          });
+}
+
+// Call the function as the page is loaded in
+$(window).on('beforeunload', ScrollToCurrentTime());
